@@ -1,12 +1,17 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, StatusBar } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation';
+import { Constants } from 'expo';
 
 import DeckList from './components/DeckList';
 import NewDeck from './components/NewDeck';
 import Deck from './components/Deck';
 import Quiz from './components/Quiz';
 import AddCard from './components/AddCard';
+
+function FlashCardsStatusBar() {
+  return <View style={{ height: Constants.statusBarHeight }}><StatusBar /></View>;
+}
 
 const Tabs = TabNavigator({
   DeckList: {
@@ -20,6 +25,10 @@ const Tabs = TabNavigator({
     navigationOptions: {
       tabBarLabel: 'New Deck'
     }
+  }
+}, {
+  navigationOptions: {
+    header: null
   }
 });
 
@@ -42,6 +51,7 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <FlashCardsStatusBar />
         <Navigator />
       </View>
     );
@@ -51,5 +61,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-  },
+  }
 });

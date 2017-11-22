@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text } from 'react-native';
 
-function DeckList(props) {
-  return (
-    <Text>DeckList</Text>
-  );
+class DeckList extends Component {
+  render() {
+    return (
+      <Text>DeckList</Text>
+    );
+  }
 }
 
 export default DeckList;
