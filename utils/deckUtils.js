@@ -1,10 +1,12 @@
 export const DECK_STORAGE_KEY = 'Flashcards';
 
-export function formatDecks(decks) {
-  return setDummyData();
+export function formatResults(results) {
+  return results === null
+    ? setInitialData()
+    : results;
 }
 
-function setDummyData() {
+export function setInitialData() {
   return {
     React: {
       title: 'React',

@@ -1,27 +1,44 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
+import { AppLoading } from 'expo';
 
 import { fetchDecks } from '../utils/api';
 import { receiveDecks } from '../actions';
 
 class DeckList extends Component {
+  state = {
+    decksLoaded: false
+  }
+
   componentDidMount() {
+    const { receiveDecks } = this.props;
     fetchDecks()
-      .then((decks) => receiveDecks(decks));
+      .then((decks) => receiveDecks(decks))
+      .then(() => this.setState(() => ({ decksLoaded: true })));
   }
 
   render() {
+    const { decks } = this.props;
+    const { decksLoaded } = this.state;
+
+    if (decksLoaded === false) {
+      return <AppLoading />;
+    }
     return (
-      <Text>DeckList</Text>
+      <Text>{JSON.stringify(decks)}</Text>
     );
   }
 }
 
+function mapStateToProps(decks) {
+  return { decks };
+}
+
 function mapDispatchToProps(dispatch) {
   return {
-    receiveDecks: () => dispatch(receiveDecks())
+    receiveDecks: (decks) => dispatch(receiveDecks(decks))
   };
 }
 
-export default connect(null, mapDispatchToProps)(DeckList);
+export default connect(mapStateToProps, mapDispatchToProps)(DeckList);
