@@ -7,6 +7,7 @@ class DeckDetail extends Component {
     // TODO: Use the actual decks name?
     return { title: 'Deck Detail' };
   }
+  
   render() {
 
     return (
