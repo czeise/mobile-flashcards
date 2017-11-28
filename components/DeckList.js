@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 
 import { fetchDecks } from '../utils/api';
 import { receiveDecks } from '../actions';
+import Deck from './Deck';
 
 class DeckList extends Component {
   state = {
@@ -25,8 +26,14 @@ class DeckList extends Component {
     if (decksLoaded === false) {
       return <AppLoading />;
     }
+
     return (
-      <Text>{JSON.stringify(decks)}</Text>
+      <ScrollView>
+        <Text>DeckList</Text>
+        {Object.keys(decks).map((deck) => (
+          <Deck key={deck} id={deck}/>
+        ))}
+      </ScrollView>
     );
   }
 }

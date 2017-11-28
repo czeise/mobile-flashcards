@@ -1,10 +1,22 @@
-import React from 'react';
-import { Text } from 'react-native';
+import React, { Component } from 'react';
+import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
-function Deck(props) {
-  return (
-    <Text>Deck</Text>
-  );
+class Deck extends Component {
+  render() {
+    const { decks, id } = this.props;
+
+    return (
+      <View>
+        <Text>Deck</Text>
+        <Text>{JSON.stringify(decks[id])}</Text>
+      </View>
+    );
+  }
 }
 
-export default Deck;
+function mapStateToProps(decks) {
+  return { decks };
+}
+
+export default connect(mapStateToProps, null)(Deck);
