@@ -20,7 +20,7 @@ class DeckList extends Component {
   }
 
   render() {
-    const { decks } = this.props;
+    const { decks, navigation } = this.props;
     const { decksLoaded } = this.state;
 
     if (decksLoaded === false) {
@@ -30,7 +30,7 @@ class DeckList extends Component {
     return (
       <ScrollView contentContainerStyle={{ flex: 1 }}>
         {Object.keys(decks).map((deck) => (
-          <Deck key={deck} id={deck}/>
+          <Deck key={deck} id={deck} navigation={navigation}/>
         ))}
       </ScrollView>
     );

@@ -5,12 +5,13 @@ import Pluralize from 'pluralize';
 
 class Deck extends Component {
   render() {
-    const { decks, id } = this.props;
+    const { decks, id, navigation } = this.props;
 
     return (
       <TouchableOpacity
         style={styles.deckButton}
         // TODO: onPress...
+        onPress={() => navigation.navigate('DeckDetail', { id: id })}
       >
         <Text style={{ fontSize: 20 }}>{decks[id].title}</Text>
         <Text style={{ fontSize: 16, color: 'gray' }}>{Pluralize('deck', decks[id].questions.length, true)}</Text>
