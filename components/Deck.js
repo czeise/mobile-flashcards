@@ -14,7 +14,7 @@ class Deck extends Component {
         onPress={() => navigation.navigate('DeckDetail', { id: id })}
       >
         <Text style={{ fontSize: 20 }}>{decks[id].title}</Text>
-        <Text style={{ fontSize: 16, color: 'gray' }}>{Pluralize('deck', decks[id].questions.length, true)}</Text>
+        <Text style={{ fontSize: 16, color: 'gray' }}>{Pluralize('card', decks[id].questions.length, true)}</Text>
       </TouchableOpacity>
     );
   }
