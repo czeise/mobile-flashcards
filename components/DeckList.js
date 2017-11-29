@@ -15,7 +15,7 @@ class DeckList extends Component {
   componentDidMount() {
     const { receiveDecks } = this.props;
     fetchDecks()
-      .then((decks) => receiveDecks(decks))
+      .then((decks) => receiveDecks(JSON.parse(decks)))
       .then(() => this.setState(() => ({ decksLoaded: true })));
   }
 

@@ -1,3 +1,5 @@
+import { setInitialDecks } from './api';
+
 export const DECK_STORAGE_KEY = 'Flashcards';
 
 export function formatResults(results) {
@@ -7,7 +9,7 @@ export function formatResults(results) {
 }
 
 export function setInitialData() {
-  return {
+  const initialData = {
     React: {
       title: 'React',
       questions: [
@@ -31,4 +33,8 @@ export function setInitialData() {
       ]
     }
   };
+
+  setInitialDecks(initialData);
+
+  return initialData;
 }
