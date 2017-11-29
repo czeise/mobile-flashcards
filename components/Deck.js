@@ -10,7 +10,6 @@ class Deck extends Component {
     return (
       <TouchableOpacity
         style={styles.deckButton}
-        // TODO: onPress...
         onPress={() => navigation.navigate('DeckDetail', { id: id })}
       >
         <Text style={{ fontSize: 20 }}>{decks[id].title}</Text>
