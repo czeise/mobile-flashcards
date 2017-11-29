@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import DeckList from './components/DeckList';
 import NewDeck from './components/NewDeck';
 import Deck from './components/Deck';
+import DeckDetail from './components/DeckDetail';
 import Quiz from './components/Quiz';
 import AddCard from './components/AddCard';
 import reducer from './reducers/index';
@@ -39,8 +40,8 @@ const Navigator = StackNavigator({
   Home: {
     screen: Tabs
   },
-  Deck: {
-    screen: Deck
+  DeckDetail: {
+    screen: DeckDetail
   },
   Quiz: {
     screen: Quiz

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, ScrollView } from 'react-native';
+import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { AppLoading } from 'expo';
 
@@ -20,7 +20,7 @@ class DeckList extends Component {
   }
 
   render() {
-    const { decks } = this.props;
+    const { decks, navigation } = this.props;
     const { decksLoaded } = this.state;
 
     if (decksLoaded === false) {
@@ -28,10 +28,9 @@ class DeckList extends Component {
     }
 
     return (
-      <ScrollView>
-        <Text>DeckList</Text>
+      <ScrollView contentContainerStyle={{ flex: 1 }}>
         {Object.keys(decks).map((deck) => (
-          <Deck key={deck} id={deck}/>
+          <Deck key={deck} id={deck} navigation={navigation}/>
         ))}
       </ScrollView>
     );
