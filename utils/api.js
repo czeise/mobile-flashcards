@@ -8,20 +8,16 @@ export function fetchDecks() {
 }
 
 export function setInitialDecks(decks) {
-  console.log(decks);
-  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks))
-    .then((decks) => console.log(JSON.stringify(decks)));
+  AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
 }
 
-export function addCardToDeck(deckTitle, card) {
-  const newData = {
-    [deckTitle]: {
-      title: deckTitle,
-      questions: [
-        card
-      ]
-    }
-  };
-
-  console.log(newData);
+export function saveCardToDeck(deckTitle, card) {
+  // I couldn't find a way to do this by only merging the new data, so instead I pull the full data
+  // set, add to it an replace what's there. Idea from armyofda12mnkeys.
+  AsyncStorage.getItem(DECK_STORAGE_KEY)
+    .then((decksString) => {
+      const decks = JSON.parse(decksString);
+      decks[deckTitle].questions.push(card);
+      AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
+    });
 }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { TextInput, View, Button } from 'react-native';
+import { TextInput, View, Button, Alert } from 'react-native';
+import { connect } from 'react-redux';
 
-import { addCardToDeck } from '../utils/api';
+import { saveCardToDeck } from '../utils/api';
+import { addCardToDeck } from '../actions';
 
 class AddCard extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -10,12 +12,27 @@ class AddCard extends Component {
 
   state = {
     question: '',
-    answer: ''
+    answer: '',
+    addNotice: false
+  }
+
+  clearState = () => {
+    this.setState({ question: '', answer: '' });
   }
 
   submit = () => {
     const { id } = this.props.navigation.state.params;
-    addCardToDeck(id, this.state);
+    const { question, answer } = this.state;
+    const newCard = { question: question, answer: answer };
+    saveCardToDeck(id, newCard);
+    this.props.addCardToDeck(id, newCard);
+
+    Alert.alert(
+      'Card added!',
+      "You can continue adding cards on this page if you'd like."
+    );
+
+    this.clearState();
   }
 
   render() {
@@ -25,11 +42,13 @@ class AddCard extends Component {
           style={{ height: 40 }}
           placeholder='Question'
           onChangeText={(question) => this.setState({ question: question })}
+          value={this.state.question}
         />
         <TextInput
           style={{ height: 40 }}
           placeholder='Answer'
           onChangeText={(answer) => this.setState({ answer: answer })}
+          value={this.state.answer}
         />
         <Button
           style={{ height: 40 }}
@@ -41,4 +60,10 @@ class AddCard extends Component {
   }
 }
 
-export default AddCard;
+function mapDispatchToProps(dispatch) {
+  return {
+    addCardToDeck: (deck, card) => dispatch(addCardToDeck(deck, card))
+  };
+}
+
+export default connect(null, mapDispatchToProps)(AddCard);
