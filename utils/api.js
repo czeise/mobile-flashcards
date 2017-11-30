@@ -21,3 +21,14 @@ export function saveCardToDeck(deckTitle, card) {
       AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(decks));
     });
 }
+
+export function saveNewDeck(title) {
+  const newDeck = {
+    [title]: {
+      title: title,
+      questions: []
+    }
+  };
+
+  AsyncStorage.mergeItem(DECK_STORAGE_KEY, JSON.stringify(newDeck));
+}
