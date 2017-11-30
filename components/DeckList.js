@@ -28,7 +28,7 @@ class DeckList extends Component {
     }
 
     return (
-      <ScrollView contentContainerStyle={{ flex: 1 }}>
+      <ScrollView>
         {Object.keys(decks).map((deck) => (
           <Deck key={deck} id={deck} navigation={navigation}/>
         ))}
