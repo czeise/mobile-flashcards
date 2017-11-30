@@ -12,8 +12,7 @@ class AddCard extends Component {
 
   state = {
     question: '',
-    answer: '',
-    addNotice: false
+    answer: ''
   }
 
   clearState = () => {
