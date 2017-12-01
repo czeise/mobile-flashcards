@@ -11,6 +11,7 @@ import DeckDetail from './components/DeckDetail';
 import Quiz from './components/Quiz';
 import AddCard from './components/AddCard';
 import reducer from './reducers/index';
+import { setLocalNotification } from './utils/notification';
 
 function FlashcardsStatusBar() {
   return <View style={{ height: Constants.statusBarHeight }}><StatusBar /></View>;
@@ -51,6 +52,10 @@ const Navigator = StackNavigator({
 });
 
 export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>
