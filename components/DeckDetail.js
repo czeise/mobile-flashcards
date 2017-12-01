@@ -19,15 +19,23 @@ class DeckDetail extends Component {
             {Pluralize('card', deck.questions.length, true)}
           </Text>
         </View>
-        <Button
-          onPress={() => navigation.navigate('AddCard', { id: navigation.state.params.id })}
-          title='Add Card'
-          style={styles.button}
-        />
-        <Button
-          onPress={() => navigation.navigate('Quiz', { id: navigation.state.params.id })}
-          title='Start Quiz' style={styles.button}
-        />
+
+        <View>
+          <View style={styles.button}>
+            <Button
+              onPress={() => navigation.navigate('AddCard', { id: navigation.state.params.id })}
+              title='Add Card'
+              style={styles.button}
+            />
+          </View>
+
+          <View style={styles.button}>
+            <Button
+              onPress={() => navigation.navigate('Quiz', { id: navigation.state.params.id })}
+              title='Start Quiz' style={styles.button}
+            />
+          </View>
+        </View>
       </View>
     );
   }
@@ -36,14 +44,19 @@ class DeckDetail extends Component {
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
-    justifyContent: 'space-around'
+    alignItems: 'center',
+    justifyContent: 'flex-start'
   },
   title: {
     backgroundColor: 'white',
+    alignSelf: 'stretch',
+    padding: 10,
+    margin: 10,
     alignItems: 'center'
   },
   button: {
-    padding: 10
+    padding: 10,
+    margin: 10
   }
 });
 
