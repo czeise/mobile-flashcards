@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, View, Button, Alert } from 'react-native';
+import { TextInput, View, Button, Alert, Platform, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import { saveCardToDeck } from '../utils/api';
@@ -36,28 +36,56 @@ class AddCard extends Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
-          style={{ height: 40 }}
+          style={styles.input}
           placeholder='Question'
           onChangeText={(question) => this.setState({ question: question })}
           value={this.state.question}
         />
+
         <TextInput
-          style={{ height: 40 }}
+          style={styles.input}
           placeholder='Answer'
           onChangeText={(answer) => this.setState({ answer: answer })}
           value={this.state.answer}
         />
-        <Button
-          style={{ height: 40 }}
-          title='Submit'
-          onPress={this.submit}
-        />
+
+        <View style={styles.button}>
+          <Button
+            style={{ height: 40 }}
+            title='Submit'
+            onPress={this.submit}
+          />
+        </View>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, alignItems: 'center', justifyContent: 'flex-start'
+  },
+  text: {
+    fontSize: 40,
+    textAlign: 'center',
+    padding: 10,
+    margin: 10
+  },
+  input: {
+    fontSize: 30,
+    alignSelf: 'stretch',
+    borderColor: 'gray',
+    borderWidth: Platform.OS === 'ios' ? 1 : 0,
+    padding: 10,
+    margin: 10
+  },
+  button: {
+    padding: 10,
+    margin: 10
+  }
+});
 
 function mapDispatchToProps(dispatch) {
   return {
