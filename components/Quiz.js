@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
 import { clearLocalNotification, setLocalNotification } from '../utils/notification';
@@ -45,11 +45,10 @@ class Quiz extends Component {
     const question = this.props.deck.questions[currentCard];
 
     return (
-      <View>
-        <Text>{question.question}</Text>
+      <View style={{ padding: 10 }}>
+        <Text style={{ fontSize: 30, padding: 10, textAlign: 'center' }}>{question.question}</Text>
         <Button
-          style={{ height: 40 }}
-          title='Answer'
+          title='View answer'
           onPress={() => this.setState({ displayQuestion: false })}
         />
       </View>
@@ -61,11 +60,10 @@ class Quiz extends Component {
     const question = this.props.deck.questions[currentCard];
 
     return (
-      <View>
-        <Text>{question.answer}</Text>
+      <View style={{ padding: 10 }}>
+        <Text style={{ fontSize: 30, padding: 10, textAlign: 'center' }}>{question.answer}</Text>
         <Button
-          style={{ height: 40 }}
-          title='Question'
+          title='View question'
           onPress={() => this.setState({ displayQuestion: true })}
         />
       </View>
@@ -77,19 +75,25 @@ class Quiz extends Component {
     const { questions } = this.props.deck;
 
     return (
-      <View>
-        <Text>{currentCard + 1}/{questions.length}</Text>
+      <View style={{ alignItems: 'center' }}>
+        <Text style={{ fontSize: 18 }}>Card {currentCard + 1} of {questions.length}</Text>
         {displayQuestion ? this.renderQuestion() : this.renderAnswer()}
-        <Button
-          style={{ height: 40, backgroundColor: 'green' }}
-          title='Correct'
-          onPress={() => this.incrementCard(true)}
-        />
-        <Button
-          style={{ height: 40, backgroundColor: 'red' }}
-          title='Incorrect'
-          onPress={() => this.incrementCard(false)}
-        />
+
+        <View style={styles.button}>
+          <Button
+            color='green'
+            title='Correct'
+            onPress={() => this.incrementCard(true)}
+          />
+        </View>
+
+        <View style={styles.button}>
+          <Button
+            color='red'
+            title='Incorrect'
+            onPress={() => this.incrementCard(false)}
+          />
+        </View>
       </View>
     );
   }
@@ -109,17 +113,23 @@ class Quiz extends Component {
 
     return (
       <View>
-        <Text>You answered {correctCount} out of {questions.length} questions correctly!</Text>
-        <Button
-          style={{ height: 40 }}
-          title='Restart Quiz'
-          onPress={() => this.restartQuiz()}
-        />
-        <Button
-          style={{ height: 40 }}
-          title='Back to Deck'
-          onPress={() => this.props.navigation.goBack()}
-        />
+        <Text style={{ fontSize: 30, padding: 10, textAlign: 'center' }}>
+          You answered {correctCount} out of {questions.length} questions correctly!
+        </Text>
+
+        <View style={styles.button}>
+          <Button
+            title='Restart Quiz'
+            onPress={() => this.restartQuiz()}
+          />
+        </View>
+
+        <View style={styles.button}>
+          <Button
+            title='Back to Deck'
+            onPress={() => this.props.navigation.goBack()}
+          />
+        </View>
       </View>
     );
   }
@@ -130,14 +140,14 @@ class Quiz extends Component {
 
     if (questions.length === 0) {
       return (
-        <Text>
+        <Text style={{ fontSize: 30, textAlign: 'center', padding: 10 }}>
           There aren't any cards in this deck! Please add cards before starting a quiz.
         </Text>
       );
     }
 
     return (
-      <View>
+      <View style={styles.container}>
         {!quizComplete
           ? this.renderQuiz()
           : this.renderQuizComplete()
@@ -146,6 +156,16 @@ class Quiz extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1, alignItems: 'stretch', justifyContent: 'flex-start'
+  },
+  button: {
+    padding: 10,
+    margin: 10
+  }
+});
 
 function mapStateToProps(decks, ownProps) {
   const deck = decks[ownProps.navigation.state.params.id];

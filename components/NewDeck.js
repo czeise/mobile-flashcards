@@ -35,17 +35,20 @@ class NewDeck extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={{ fontSize: 40, textAlign: 'center' }}>Enter a name for your new deck:</Text>
+        <Text style={styles.text}>Enter a name for your new deck:</Text>
         <TextInput
           style={styles.input}
           placeholder='Deck Title'
           onChangeText={(title) => this.setState({ title: title })}
           value={this.state.title}
         />
-        <Button
-          title='Create Deck'
-          onPress={this.submit}
-        />
+
+        <View style={styles.button}>
+          <Button
+            title='Create Deck'
+            onPress={this.submit}
+          />
+        </View>
       </View>
     );
   }
@@ -53,13 +56,25 @@ class NewDeck extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, alignItems: 'center', justifyContent: 'space-around', padding: 20
+    flex: 1, alignItems: 'center', justifyContent: 'flex-start'
+  },
+  text: {
+    fontSize: 40,
+    textAlign: 'center',
+    padding: 10,
+    margin: 10
   },
   input: {
     fontSize: 30,
     alignSelf: 'stretch',
     borderColor: 'gray',
-    borderWidth: Platform.OS === 'ios' ? 1 : 0
+    borderWidth: Platform.OS === 'ios' ? 1 : 0,
+    padding: 10,
+    margin: 10
+  },
+  button: {
+    padding: 10,
+    margin: 10
   }
 });
 
