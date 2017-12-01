@@ -47,8 +47,8 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps(decks, props) {
-  const deck = decks[props.navigation.state.params.id];
+function mapStateToProps(decks, ownProps) {
+  const deck = decks[ownProps.navigation.state.params.id];
   return { deck };
 }
 
