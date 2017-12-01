@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Text, View, Button } from 'react-native';
 import { connect } from 'react-redux';
 
+import { clearLocalNotification, setLocalNotification } from '../utils/notification';
+
 class Quiz extends Component {
   static navigationOptions = ({ navigation }) => {
     return { title: `${navigation.state.params.id} Quiz`};
@@ -27,6 +29,9 @@ class Quiz extends Component {
         correctCount: newCount
       });
     } else {
+      clearLocalNotification()
+        .then(setLocalNotification);
+
       this.setState({
         quizComplete: true,
         displayQuestion: true,
